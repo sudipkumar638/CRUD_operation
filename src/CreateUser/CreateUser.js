@@ -6,12 +6,13 @@ const CreateUser = () => {
     const [email, setEmail] = useState("");
     const [phoneno, setPhoneno] = useState("");
     const [address, setAddress] = useState("");
-
+    const [status, setStatus] = useState("Active")
     const data = {
         name: name,
         email: email,
         phoneno: phoneno,
-        address: address
+        address: address,
+        status: status
     }
 
     return (

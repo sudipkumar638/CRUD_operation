@@ -1,8 +1,39 @@
-import React from 'react'
-import { NavLink, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { NavLink, } from 'react-router-dom';
 import "./navbar.css";
-
+import { getData } from '../Actions/Action';
+import { useSelector, useDispatch } from 'react-redux';
+import alldata from "../AllData"
 const Navbar = () => {
+
+    const dispatch = useDispatch();
+    const data = useSelector((state) => state.Getdataredducer.data)
+    const [search, setSearch] = useState("");
+    function serachOnTyping(e) {
+
+        let value = e.target.value
+        setSearch(value);
+        const real = data.filter((item) => {
+            return item.name.toLowerCase().includes(value.toLowerCase())
+        })
+
+        dispatch(getData(real))
+
+    }
+
+    useEffect(() => {
+        if (search == "" || null) {
+            dispatch(getData(alldata));
+        }
+
+    }, [search])
+
+
+
+
+
+
+
 
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -37,7 +68,7 @@ const Navbar = () => {
 
                     </ul>
                     <div className="d-flex" role="search">
-                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                        <input className="form-control me-2" onChange={serachOnTyping} type="search" placeholder="Search" aria-label="Search" />
                         <button className="btn btn-outline-success">Search</button>
                     </div>
                 </div>
