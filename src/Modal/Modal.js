@@ -2,12 +2,12 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { createUserData } from '../Actions/Action';
+import { createuser } from '../Services/ApiCalls';
 const Modal = ({ data }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    function addUser(data) {
+    async function addUser(data) {
         const userData = {
-            id: 1,
             status: data.status,
             name: data.name,
             email: data.email,
@@ -16,11 +16,20 @@ const Modal = ({ data }) => {
 
         }
 
-        dispatch(createUserData(userData));
+        // dispatch(createUserData(userData));
+
+        try {
+            await createuser(userData);
+            navigate('/');
+        }
+        catch (e) {
+            console.log("Error creating user")
+        }
 
 
 
-        navigate("/")
+
+
 
     }
     return (

@@ -1,7 +1,8 @@
 const initialState = [
     {
         data: [],
-        count: 0
+        count: 0,
+        search: []
     }
 ]
 

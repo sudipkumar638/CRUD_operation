@@ -27,3 +27,14 @@ export const getSearchedData = async (data) => {
 }
 
 
+export const createuser = async (data) => {
+    try {
+        const response = await axios.post(`${url}createusers`, data)
+        console.log(response.data);
+    }
+    catch (e) {
+        console.log("Error creating user")
+    }
+}
+
+

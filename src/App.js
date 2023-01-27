@@ -13,6 +13,10 @@ function App() {
     getUserDetails()
   }, [])
 
+  const val = useSelector((state) => state.Getdataredducer);
+  useEffect(() => {
+    getUserDetails()
+  }, [val])
   async function getUserDetails() {
     try {
       const userData = await getAllData();
