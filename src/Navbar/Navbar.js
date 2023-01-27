@@ -3,30 +3,21 @@ import { NavLink, } from 'react-router-dom';
 import "./navbar.css";
 import { getData } from '../Actions/Action';
 import { useSelector, useDispatch } from 'react-redux';
-import alldata from "../AllData"
+import { getSearchedData } from '../Services/ApiCalls';
 const Navbar = () => {
 
     const dispatch = useDispatch();
     const data = useSelector((state) => state.Getdataredducer.data)
     const [search, setSearch] = useState("");
-    function serachOnTyping(e) {
-
-        let value = e.target.value
-        setSearch(value);
-        const real = data.filter((item) => {
-            return item.name.toLowerCase().includes(value.toLowerCase())
-        })
-
-        dispatch(getData(real))
-
+    async function serachOnTyping(e) {
+        setSearch(e.target.value);
+        const data = await getSearchedData(e.target.value);
+        console.log(data.data)
+        dispatch(getData(data.data));
     }
 
-    useEffect(() => {
-        if (search == "" || null) {
-            dispatch(getData(alldata));
-        }
 
-    }, [search])
+
 
 
 

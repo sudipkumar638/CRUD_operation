@@ -1,27 +1,39 @@
 import AllRoutes from "./AllRoutes/AllRoutes";
-import CreateUser from "./CreateUser/CreateUser";
 import Navbar from "./Navbar/Navbar";
-import Table from "./Table/Table";
-import Getdataredducer from "./Reducers/Getdataredducer";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import arr from "./AllData"
+
 import { getData } from "./Actions/Action";
+import { getAllData } from './Services/ApiCalls';
+
 function App() {
   const dispatch = useDispatch()
+
   useEffect(() => {
-
-    dispatch(getData(arr));
-
+    getUserDetails()
   }, [])
+
+  async function getUserDetails() {
+    try {
+      const userData = await getAllData();
+      console.log(userData)
+      dispatch(getData(userData));
+    }
+    catch (e) {
+      console.log("Some Error Occure During ApiCall")
+    }
+  }
+
+
+
+
   return (
     <div className="App ">
       <Navbar></Navbar>
       <AllRoutes></AllRoutes>
-      {/* <Table></Table> */}
-
     </div>
   );
 }
+
 
 export default App;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import "./table.css";
-import arr from "../AllData";
+
 import { useSelector } from "react-redux";
 
 

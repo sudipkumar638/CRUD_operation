@@ -83,7 +83,7 @@ const data = [
     {
         id: 10,
         status: 'Active',
-        name: ' Saurabh Pandey',
+        name: ' Saurabh Pandeyyyyyyy',
         email: 'saurabh@example.com',
         phoneno: '7388622999',
         address: "Iffco chwok,Gurgaon",
@@ -91,4 +91,4 @@ const data = [
     },
 ]
 
-export default data;
+module.exports = data;
