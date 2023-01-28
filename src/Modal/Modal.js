@@ -16,10 +16,11 @@ const Modal = ({ data }) => {
 
         }
 
-        // dispatch(createUserData(userData));
+
 
         try {
-            await createuser(userData);
+            const res = await createuser(userData);
+            dispatch(createUserData(userData));
             navigate('/');
         }
         catch (e) {

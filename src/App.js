@@ -9,14 +9,15 @@ import { getAllData } from './Services/ApiCalls';
 function App() {
   const dispatch = useDispatch()
 
+  const val = useSelector((state) => state.Getdataredducer);
+
   useEffect(() => {
     getUserDetails()
   }, [])
 
-  const val = useSelector((state) => state.Getdataredducer);
-  useEffect(() => {
-    getUserDetails()
-  }, [val])
+
+
+
   async function getUserDetails() {
     try {
       const userData = await getAllData();

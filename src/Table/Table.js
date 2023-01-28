@@ -6,8 +6,8 @@ import { useSelector } from "react-redux";
 
 
 const Table = () => {
-    const [data, setData] = useState(useSelector((state) => state.Getdataredducer));
-
+    const [data, setData] = useState([]);
+    console.log(data)
     const navigate = useNavigate();
 
     function addUser() {
@@ -15,13 +15,14 @@ const Table = () => {
     }
 
 
-    const val = useSelector((state) => state.Getdataredducer);
+    const val = useSelector((state) => state.Getdataredducer.data);
     useEffect(() => {
         setData(val);
     }, [val])
 
 
-    const finalData = data.data
+
+
     return (
         <div className='container my-5 '>
             <div className='row'>
@@ -40,8 +41,8 @@ const Table = () => {
                         </thead>
                         <tbody>
 
-                            {finalData != undefined ?
-                                finalData.map((item, index) => {
+                            {data != undefined ?
+                                data.map((item, index) => {
                                     return (<tr key={index} >
                                         <th scope="row">{index}</th>
                                         <td>{item.status}</td>
