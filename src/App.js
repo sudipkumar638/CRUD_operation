@@ -21,7 +21,7 @@ function App() {
   async function getUserDetails() {
     try {
       const userData = await getAllData();
-      console.log(userData)
+
       dispatch(getData(userData));
     }
     catch (e) {

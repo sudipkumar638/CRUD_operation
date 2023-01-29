@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import "./table.css";
-
+import { Link } from 'react-router-dom';
 import { useSelector } from "react-redux";
 
 
@@ -14,6 +14,10 @@ const Table = () => {
         navigate("/createusers")
     }
 
+    function navigateToUpdate(id) {
+        navigate(`/updateusers/${id}`)
+    }
+
 
     const val = useSelector((state) => state.Getdataredducer.data);
     useEffect(() => {
@@ -21,6 +25,23 @@ const Table = () => {
     }, [val])
 
 
+    // let sortedarray = data?.sort((val1, val2) => {
+
+    //     if (val1.name.toUpperCase() > val2.name.toUpperCase()) {
+    //         return 1;
+
+    //     }
+    //     else if (val1.name.toUpperCase() < val2.name.toUpperCase()) {
+    //         return -1;
+    //     }
+    //     else {
+    //         return 0
+    //     }
+    // }
+    // )
+
+    // console.log(sortedarray)
+    console.log(data)
 
 
     return (
@@ -29,6 +50,7 @@ const Table = () => {
                 <div className='col-12 '>
                     <table className="table  table-hover ">
                         <thead>
+
                             <tr>
                                 <th scope="col">ID</th>
                                 <th scope="col">Status</th>
@@ -43,14 +65,18 @@ const Table = () => {
 
                             {data != undefined ?
                                 data.map((item, index) => {
-                                    return (<tr key={index} >
-                                        <th scope="row">{index}</th>
-                                        <td>{item.status}</td>
-                                        <td>{item.name}</td>
-                                        <td>{item.email}</td>
-                                        <td>{item.phoneno}</td>
-                                        <td>{item.address}</td>
-                                    </tr>)
+                                    return (
+
+                                        <tr key={index} onClick={(e) => { navigateToUpdate(item._id) }} >
+                                            <th scope="row">{index}</th>
+                                            <td>{item.status}</td>
+                                            <td>{item.name}</td>
+                                            <td>{item.email}</td>
+                                            <td>{item.phoneno}</td>
+                                            <td>{item.address}</td>
+                                        </tr>
+
+                                    )
                                 })
                                 : <>
 
