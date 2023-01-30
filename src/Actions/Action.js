@@ -15,3 +15,13 @@ export function createUserData(data) {
         }
     }
 }
+export function deleteUserData(data) {
+
+    return {
+        type: "DELETE_USER_DATA",
+        payload: {
+            data: data
+        }
+    }
+}
+

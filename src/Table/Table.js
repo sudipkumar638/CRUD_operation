@@ -3,26 +3,61 @@ import { useNavigate } from 'react-router-dom';
 import "./table.css";
 import { Link } from 'react-router-dom';
 import { useSelector } from "react-redux";
+import { deleteUserApi, getAllData } from '../Services/ApiCalls';
+import { useDispatch } from 'react-redux';
+import { deleteUserData } from '../Actions/Action';
+import { getData } from '../Actions/Action';
 
 
 const Table = () => {
     const [data, setData] = useState([]);
-    console.log(data)
+
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const val = useSelector((state) => state.Getdataredducer.data);
+    let deletedcount = useSelector((state) => state.Getdataredducer.deletedcount);
+    console.log(deletedcount)
+    useEffect(() => {
+        setData(val);
+    }, [val])
+
+    useEffect(() => {
+        getUserDetails()
+        console.log("hello sudip")
+    }, [deletedcount])
 
     function addUser() {
         navigate("/createusers")
+    }
+
+    async function deleteUser(id) {
+        const deletedId = await deleteUserApi(id)
+        console.log(deletedId)
+        dispatch(deleteUserData(deletedId))
+
     }
 
     function navigateToUpdate(id) {
         navigate(`/updateusers/${id}`)
     }
 
+    async function getUserDetails() {
+        try {
+            const userData = await getAllData();
 
-    const val = useSelector((state) => state.Getdataredducer.data);
-    useEffect(() => {
-        setData(val);
-    }, [val])
+            dispatch(getData(userData));
+        }
+        catch (e) {
+            console.log("Some Error Occure During ApiCall")
+        }
+    }
+
+
+
+
+
+
+
 
 
     // let sortedarray = data?.sort((val1, val2) => {
@@ -41,7 +76,7 @@ const Table = () => {
     // )
 
     // console.log(sortedarray)
-    console.log(data)
+
 
 
     return (
@@ -59,6 +94,7 @@ const Table = () => {
                                 <th scope="col">Email</th>
                                 <th scope="col">Phone No</th>
                                 <th scope="col">Address</th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -67,13 +103,15 @@ const Table = () => {
                                 data.map((item, index) => {
                                     return (
 
-                                        <tr key={index} onClick={(e) => { navigateToUpdate(item._id) }} >
+                                        <tr key={index}  >
                                             <th scope="row">{index}</th>
                                             <td>{item.status}</td>
                                             <td>{item.name}</td>
                                             <td>{item.email}</td>
                                             <td>{item.phoneno}</td>
                                             <td>{item.address}</td>
+                                            <td> <button type="button" onClick={() => { navigateToUpdate(item._id) }} className="btn btn-warning">Update</button></td>
+                                            <td> <button type="button" onClick={() => { deleteUser(item._id) }} className="btn btn-danger">Delete</button></td>
                                         </tr>
 
                                     )

@@ -62,6 +62,26 @@ app.post("/createusers", async (req, res) => {
         console.log(e, "error")
     }
 })
+app.delete("/:id", async (req, res) => {
+    const id = req.params.id;
+    try {
+        await user.findByIdAndDelete(id, (err, data) => {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                res.json({
+                    success: true,
+                    message: "User deleted successfully",
+                    deletedId: id
+                });
+            }
+        })
+    }
+    catch (e) {
+        console.log(e, "error")
+    }
+})
 
 
 

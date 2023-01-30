@@ -18,6 +18,9 @@ function App() {
 
 
 
+
+
+
   async function getUserDetails() {
     try {
       const userData = await getAllData();
@@ -42,3 +45,4 @@ function App() {
 
 
 export default App;
+

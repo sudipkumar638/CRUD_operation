@@ -2,7 +2,8 @@ const initialState = [
     {
         data: [],
         count: 0,
-        search: []
+        search: [],
+        deletedcount: 0
     }
 ]
 
@@ -22,6 +23,15 @@ const Getdataredducer = (state = initialState, action) => {
         return {
             ...state,
             data: [...state.data, action.payload.data]
+        }
+    }
+
+    else if (action.type == 'DELETE_USER_DATA') {
+
+        console.log(action.payload.data)
+        return {
+            ...state,
+            deletedcount: action.payload.data
         }
     }
 

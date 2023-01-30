@@ -10,6 +10,7 @@ const AllRoutes = () => {
                 <Route path='/' element={<Table />}></Route>
                 <Route path='/createusers' element={<CreateUser />}></Route>
                 <Route path='/updateusers/:id' element={<UpdateUserDetails />}></Route>
+
             </Routes>
         </>
     )

@@ -38,3 +38,15 @@ export const createuser = async (data) => {
 }
 
 
+export const deleteUserApi = async (data) => {
+    try {
+        const response = await axios.delete(`${url}${data}`);
+        return response.data.deletedId;
+
+    }
+    catch (e) {
+        console.log("Error deleting user")
+    }
+}
+
+
