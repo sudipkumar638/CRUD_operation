@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { createUserData } from '../Actions/Action';
 import { createuser } from '../Services/ApiCalls';
-const Modal = ({ data }) => {
+const Modal = ({ data, action }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     async function addUser(data) {
@@ -16,8 +16,6 @@ const Modal = ({ data }) => {
 
         }
 
-
-
         try {
             const res = await createuser(userData);
             dispatch(createUserData(userData));
@@ -27,17 +25,16 @@ const Modal = ({ data }) => {
             console.log("Error creating user")
         }
 
-
-
-
-
-
     }
+    async function UpdateUser(data) {
+        console.log("Updating user", data)
+    }
+
     return (
         <div>
 
             <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                Add User
+                {action == "add" ? "Add User" : "Update User"}
             </button>
 
             <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -48,12 +45,18 @@ const Modal = ({ data }) => {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                            Are You Sure to Create a new User?
+                            {action == "add" ? "Are You Sure to Create a new User?" : "Are You Sure to Update Current User Details?"}
+
                         </div>
                         <div className="modal-footer">
+                            {action == "add" ? <>
+                                <button type="button" onClick={() => addUser(data)} data-bs-dismiss="modal" className="btn btn-primary">Yes</button>
+                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                            </> : <>
+                                <button type="button" onClick={() => UpdateUser(data)} data-bs-dismiss="modal" className="btn btn-primary">Yes</button>
+                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                            </>}
 
-                            <button type="button" onClick={() => addUser(data)} data-bs-dismiss="modal" className="btn btn-primary">Yes</button>
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">No</button>
                         </div>
                     </div>
                 </div>

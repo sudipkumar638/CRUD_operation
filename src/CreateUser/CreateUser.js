@@ -43,7 +43,7 @@ const CreateUser = () => {
                             setAddress(e.target.value)
                         }} className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                     </div>
-                    <Modal data={data}></Modal>
+                    <Modal data={data} action="add"></Modal>
 
                 </div>
 
