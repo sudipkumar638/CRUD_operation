@@ -1,11 +1,14 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { createUserData } from '../Actions/Action';
 import { createuser } from '../Services/ApiCalls';
+import { updateUserApi } from '../Services/ApiCalls';
 const Modal = ({ data, action }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const { id } = useParams();
+
     async function addUser(data) {
         const userData = {
             status: data.status,
@@ -27,7 +30,19 @@ const Modal = ({ data, action }) => {
 
     }
     async function UpdateUser(data) {
-        console.log("Updating user", data)
+        console.log(id)
+        const updatedUserData = {
+            data: data,
+            id: id
+        }
+        try {
+            const res = await updateUserApi(updatedUserData);
+
+            navigate('/');
+        }
+        catch (e) {
+            console.log("Error updating user")
+        }
     }
 
     return (

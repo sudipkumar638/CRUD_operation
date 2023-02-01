@@ -78,6 +78,26 @@ app.delete("/:id", async (req, res) => {
 
 })
 
+app.put("/updateusers", async (req, res) => {
+    const userdata = req.body;
+    try {
+        await user.findByIdAndUpdate(userdata.id, userdata.data)
+        res.json({
+            success: true,
+            message: "User updated successfully"
+        })
+    }
+    catch (e) {
+        console.log("Error while updating")
+    }
+
+
+
+
+
+})
+
+
 
 
 
